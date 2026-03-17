@@ -1,0 +1,165 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.7/schema.json",
+  "extends": ["ultracite/core"],
+  "root": true,
+  "vcs": {
+    "clientKind": "git",
+    "defaultBranch": "main",
+    "enabled": true,
+    "useIgnoreFile": true
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [":URL:", ":NODE:"],
+              ":BLANK_LINE:",
+              [":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:"],
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        },
+        "useSortedAttributes": "on",
+        "useSortedKeys": "off",
+        "useSortedProperties": "off",
+        "noDuplicateClasses": "on",
+        "useSortedInterfaceMembers": "off"
+      }
+    },
+    "enabled": true
+  },
+  "formatter": {
+    "attributePosition": "auto",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 100
+  },
+  "linter": {
+    "domains": {
+      "project": "recommended",
+      "test": "recommended",
+      "types": "recommended"
+    },
+    "enabled": true,
+    "rules": {
+      "complexity": {
+        "useLiteralKeys": "off"
+      },
+      "style": {
+        "noDefaultExport": "error",
+        "noInferrableTypes": "off",
+        "useConsistentMemberAccessibility": {
+          "level": "warn",
+          "options": {
+            "accessibility": "explicit"
+          }
+        },
+        "useConsistentTypeDefinitions": {
+          "fix": "safe",
+          "level": "warn",
+          "options": {
+            "style": "interface"
+          }
+        },
+        "noParameterProperties": "off"
+      },
+      "suspicious": {
+        "noImportCycles": "error",
+        "useIterableCallbackReturn": {
+          "level": "error",
+          "options": {
+            "checkForEach": true
+          }
+        },
+        "useAwait": "off"
+      }
+    }
+  },
+  "javascript": {
+    "assist": {
+      "enabled": true
+    },
+    "formatter": {
+      "arrowParentheses": "always",
+      "attributePosition": "auto",
+      "bracketSameLine": true,
+      "bracketSpacing": true,
+      "enabled": true,
+      "lineEnding": "lf",
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    },
+    "experimentalEmbeddedSnippetsEnabled": true
+  },
+  "json": {
+    "assist": {
+      "enabled": true
+    },
+    "formatter": {
+      "bracketSpacing": true,
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 100,
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "allowComments": true,
+      "allowTrailingCommas": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          },
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.{spec,test}.ts"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noExcessiveLinesPerFunction": "off",
+            "noStaticOnlyClass": "off"
+          },
+          "performance": {
+            "useTopLevelRegex": "off"
+          },
+          "suspicious": {
+            "noEmptyBlock": "off",
+            "noEmptyBlockStatements": "off",
+            "useAwait": "off"
+          }
+        }
+      }
+    }
+  ]
+}

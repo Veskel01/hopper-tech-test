@@ -1,20 +1,23 @@
-type Response = {
-    ok: boolean;
-    error?: string;
-};
+import type { BatchDispatcher } from './application/batch-dispatcher';
+import { parseAndValidateBatch } from './validation/parse-and-validate-batch';
+
+interface Response {
+  ok: boolean;
+  error?: string;
+}
+
 export class CallHandler {
+  public constructor(private readonly dispatcher: BatchDispatcher) {}
 
-    /**
-     * Handle a batch of call records
-     *
-     * @param payload The raw batch of CDRs in CSV format.
-     */
-    public async handleBatch(payload: string): Promise<Response> {
+  public async handleBatch(payload: string): Promise<Response> {
+    const result = parseAndValidateBatch(payload);
 
-        // TODO Handler code
-        // ...
-
-
-        return { ok: true };
+    if (!result.ok) {
+      return { ok: false, error: result.error };
     }
+
+    this.dispatcher.dispatch(result.value);
+
+    return { ok: true };
+  }
 }
